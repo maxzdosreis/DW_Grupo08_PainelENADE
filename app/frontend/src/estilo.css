@@ -1,0 +1,69 @@
+:root {
+  --azul: #0b3a6b;
+  --azul-escuro: #082c52;
+  --amarelo: #f2b705;
+  --fundo: #f1f4f8;
+
+  --bs-primary: var(--azul);
+  --bs-primary-rgb: 11, 58, 107;
+  --bs-link-color: var(--azul);
+}
+
+body {
+  background: var(--fundo);
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  color: #1d2733;
+}
+
+.btn-primary {
+  --bs-btn-bg: var(--azul);
+  --bs-btn-border-color: var(--azul);
+  --bs-btn-hover-bg: var(--azul-escuro);
+  --bs-btn-hover-border-color: var(--azul-escuro);
+  --bs-btn-active-bg: var(--azul-escuro);
+  --bs-btn-active-border-color: var(--azul-escuro);
+  --bs-btn-disabled-bg: var(--azul);
+  --bs-btn-disabled-border-color: var(--azul);
+}
+
+.form-control:focus {
+  border-color: var(--azul);
+  box-shadow: 0 0 0 0.2rem rgba(11, 58, 107, 0.2);
+}
+
+.titulo-painel {
+  color: var(--azul);
+  font-weight: 700;
+}
+
+.tela-centro {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.cartao-login {
+  width: 100%;
+  max-width: 420px;
+  border: 0;
+  border-top: 4px solid var(--amarelo);
+}
+
+.barra-topo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.75rem 1.25rem;
+  background: var(--azul);
+  color: #fff;
+  border-bottom: 3px solid var(--amarelo);
+}
+
+@media (max-width: 480px) {
+  .cartao-login .card-body {
+    padding: 1.5rem !important;
+  }
+}
