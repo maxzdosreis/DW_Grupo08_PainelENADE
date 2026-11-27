@@ -18,11 +18,11 @@ CREATE TABLE usuario (
     UNIQUE KEY uq_usuario_login (login)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Oferta = combinação de curso, grau acadêmico e modalidade (ex.: O01).
+-- Oferta = combinação de curso, grau acadêmico e modalidade (ex.: O07).
 CREATE TABLE oferta (
     id             INT UNSIGNED NOT NULL AUTO_INCREMENT,
-    codigo         VARCHAR(10)  NOT NULL,   -- ex.: O01
-    recorte_id     VARCHAR(5)   NOT NULL,   -- ex.: R01
+    codigo         VARCHAR(10)  NOT NULL,   -- ex.: O07
+    recorte_id     VARCHAR(5)   NOT NULL,   -- ex.: R09
     curso          VARCHAR(150) NOT NULL,
     grau_academico VARCHAR(50)  NOT NULL,
     modalidade     VARCHAR(50)  NOT NULL,
