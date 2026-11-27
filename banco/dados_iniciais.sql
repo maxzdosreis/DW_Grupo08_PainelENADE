@@ -40,3 +40,12 @@ INSERT INTO resultado (oferta_id, ano, inscritos, participantes, nota_formacao_g
 ((SELECT id FROM oferta WHERE codigo='O32'), 2023, 45, 31, 45.43, 54.83, 2.9096, '3', 'Componente Específico com resultado superior à Formação Geral', 'Acompanhar o desempenho em Formação Geral', 'SIMULADO_DIDATICO'),
 ((SELECT id FROM oferta WHERE codigo='O32'), 2024, 43, 30, 47.96, 54.03, 2.7484, '3', 'Componente Específico com resultado superior à Formação Geral', 'Acompanhar o desempenho em Formação Geral', 'SIMULADO_DIDATICO'),
 ((SELECT id FROM oferta WHERE codigo='O32'), 2025, 38, 28, 48.4, 52.17, 2.7755, '3', 'Componente Específico com resultado superior à Formação Geral', 'Acompanhar o desempenho em Formação Geral', 'SIMULADO_DIDATICO');
+
+INSERT INTO usuario (nome, login, senha) VALUES
+('Usuário demonstrador', 'demo', '$2y$12$e6CxI2JMsQfpiNk3aJSqWOeOxV4RvAzj/TQFxNPLO8zVpNb8UcL8C');
+
+INSERT INTO acao (oferta_id, titulo, descricao, situacao, responsavel, prazo,
+    anexo_nome_original, anexo_arquivo) VALUES
+((SELECT id FROM oferta WHERE codigo='O01'), 'Revisar conteúdos de raciocínio quantitativo', 'Revisar a ementa e os exercícios das disciplinas de estatística e matemática financeira, alinhando-os ao perfil de questões do ENADE.', 'Em andamento', 'NDE do curso', '2026-11-30', 'plano.pdf', 'demo_plano_acao.pdf'),
+((SELECT id FROM oferta WHERE codigo='O01'), 'Aplicar simulado interdisciplinar', 'Aplicação de simulado com questões de formação geral e de componente específico para os concluintes, com devolutiva por área.', 'Concluída', 'Coordenação', '2026-10-15', 'registro_oficina.png', 'demo_registro_oficina.png'),
+((SELECT id FROM oferta WHERE codigo='O01'), 'Oficina de questões discursivas', 'Oficina prática para treinar a resolução e a correção de questões discursivas com os estudantes do último ano.', 'Planejada', 'Docentes', '2027-03-20', NULL, NULL);
