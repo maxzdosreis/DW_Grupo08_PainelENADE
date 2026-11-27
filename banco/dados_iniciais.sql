@@ -1,0 +1,42 @@
+USE painel_enade;
+
+INSERT INTO oferta (codigo, recorte_id, curso, grau_academico, modalidade) VALUES
+('O01', 'R01', 'ADMINISTRAÇÃO', 'Bacharelado', 'Educação Presencial'),
+('O02', 'R01', 'ADMINISTRAÇÃO', 'Bacharelado', 'Educação a Distância'),
+('O32', 'R01', 'TECNOLOGIA EM GESTÃO COMERCIAL', 'Tecnológico', 'Educação a Distância');
+
+INSERT INTO resultado (oferta_id, ano, inscritos, participantes, nota_formacao_geral,
+    nota_componente_especifico, conceito_continuo, conceito_faixa, ponto_forte, ponto_atencao, origem_dado) VALUES
+((SELECT id FROM oferta WHERE codigo='O01'), 2015, 95, 86, 52.7314, 41.2919, 2.5756, '3', 'Formação Geral com resultado superior ao Componente Específico', 'Acompanhar o desempenho no Componente Específico', 'OFICIAL_INEP'),
+((SELECT id FROM oferta WHERE codigo='O01'), 2016, 79, 73, 49.03, 39.65, 2.551, '3', 'Formação Geral com resultado superior ao Componente Específico', 'Acompanhar o desempenho no Componente Específico', 'SIMULADO_DIDATICO'),
+((SELECT id FROM oferta WHERE codigo='O01'), 2017, 62, 57, 45.35, 38.74, 2.5215, '3', 'Formação Geral com resultado superior ao Componente Específico', 'Acompanhar o desempenho no Componente Específico', 'SIMULADO_DIDATICO'),
+((SELECT id FROM oferta WHERE codigo='O01'), 2018, 44, 41, 41.69268, 37.52195, 2.52002, '3', 'Formação Geral com resultado superior ao Componente Específico', 'Acompanhar o desempenho no Componente Específico', 'OFICIAL_INEP'),
+((SELECT id FROM oferta WHERE codigo='O01'), 2019, 41, 36, 44.99, 38.01, 2.5195, '3', 'Formação Geral com resultado superior ao Componente Específico', 'Acompanhar o desempenho no Componente Específico', 'SIMULADO_DIDATICO'),
+((SELECT id FROM oferta WHERE codigo='O01'), 2020, 37, 30, 47.21, 38.38, 2.538, '3', 'Formação Geral com resultado superior ao Componente Específico', 'Acompanhar o desempenho no Componente Específico', 'SIMULADO_DIDATICO'),
+((SELECT id FROM oferta WHERE codigo='O01'), 2021, 33, 25, 50.24, 38.33, 2.5107, '3', 'Formação Geral com resultado superior ao Componente Específico', 'Acompanhar o desempenho no Componente Específico', 'SIMULADO_DIDATICO'),
+((SELECT id FROM oferta WHERE codigo='O01'), 2022, 30, 21, 53.471, 38.752, 2.537, '3', 'Formação Geral com resultado superior ao Componente Específico', 'Acompanhar o desempenho no Componente Específico', 'OFICIAL_INEP'),
+((SELECT id FROM oferta WHERE codigo='O01'), 2023, 24, 17, 54.44, 39.98, 2.4975, '3', 'Formação Geral com resultado superior ao Componente Específico', 'Acompanhar o desempenho no Componente Específico', 'SIMULADO_DIDATICO'),
+((SELECT id FROM oferta WHERE codigo='O01'), 2024, 22, 15, 54.98, 39.86, 2.5286, '3', 'Formação Geral com resultado superior ao Componente Específico', 'Acompanhar o desempenho no Componente Específico', 'SIMULADO_DIDATICO'),
+((SELECT id FROM oferta WHERE codigo='O01'), 2025, 19, 13, 55.74, 40.84, 2.5086, '3', 'Formação Geral com resultado superior ao Componente Específico', 'Acompanhar o desempenho no Componente Específico', 'SIMULADO_DIDATICO'),
+((SELECT id FROM oferta WHERE codigo='O02'), 2015, 132, 106, 49.27, 38.25, 2.5029, '3', 'Formação Geral com resultado superior ao Componente Específico', 'Acompanhar o desempenho no Componente Específico', 'SIMULADO_DIDATICO'),
+((SELECT id FROM oferta WHERE codigo='O02'), 2016, 135, 109, 48.94, 38.74, 2.5356, '3', 'Formação Geral com resultado superior ao Componente Específico', 'Acompanhar o desempenho no Componente Específico', 'SIMULADO_DIDATICO'),
+((SELECT id FROM oferta WHERE codigo='O02'), 2017, 130, 105, 49.44, 39.82, 2.5611, '3', 'Formação Geral com resultado superior ao Componente Específico', 'Acompanhar o desempenho no Componente Específico', 'SIMULADO_DIDATICO'),
+((SELECT id FROM oferta WHERE codigo='O02'), 2018, 138, 115, 48.24, 39.07, 2.6067, '3', 'Formação Geral com resultado superior ao Componente Específico', 'Acompanhar o desempenho no Componente Específico', 'SIMULADO_DIDATICO'),
+((SELECT id FROM oferta WHERE codigo='O02'), 2019, 145, 118, 49.7, 39.6, 2.5788, '3', 'Formação Geral com resultado superior ao Componente Específico', 'Acompanhar o desempenho no Componente Específico', 'SIMULADO_DIDATICO'),
+((SELECT id FROM oferta WHERE codigo='O02'), 2020, 147, 121, 49.42, 41.14, 2.5735, '3', 'Formação Geral com resultado superior ao Componente Específico', 'Acompanhar o desempenho no Componente Específico', 'SIMULADO_DIDATICO'),
+((SELECT id FROM oferta WHERE codigo='O02'), 2021, 159, 128, 48.96, 40.81, 2.6166, '3', 'Formação Geral com resultado superior ao Componente Específico', 'Acompanhar o desempenho no Componente Específico', 'SIMULADO_DIDATICO'),
+((SELECT id FROM oferta WHERE codigo='O02'), 2022, 160, 131, 49.819, 41.519, 2.666, '3', 'Formação Geral com resultado superior ao Componente Específico', 'Acompanhar o desempenho no Componente Específico', 'OFICIAL_INEP'),
+((SELECT id FROM oferta WHERE codigo='O02'), 2023, 150, 124, 50.58, 41.41, 2.6189, '3', 'Formação Geral com resultado superior ao Componente Específico', 'Acompanhar o desempenho no Componente Específico', 'SIMULADO_DIDATICO'),
+((SELECT id FROM oferta WHERE codigo='O02'), 2024, 140, 120, 50.83, 41.6, 2.741, '3', 'Formação Geral com resultado superior ao Componente Específico', 'Acompanhar o desempenho no Componente Específico', 'SIMULADO_DIDATICO'),
+((SELECT id FROM oferta WHERE codigo='O02'), 2025, 125, 107, 49.1, 42.35, 2.6952, '3', 'Formação Geral com resultado superior ao Componente Específico', 'Acompanhar o desempenho no Componente Específico', 'SIMULADO_DIDATICO'),
+((SELECT id FROM oferta WHERE codigo='O32'), 2015, 34, 24, 42.1, 52.35, 2.9582, '4', 'Componente Específico com resultado superior à Formação Geral', 'Acompanhar o desempenho em Formação Geral', 'SIMULADO_DIDATICO'),
+((SELECT id FROM oferta WHERE codigo='O32'), 2016, 40, 29, 43.98, 50.38, 2.9317, '3', 'Componente Específico com resultado superior à Formação Geral', 'Acompanhar o desempenho em Formação Geral', 'SIMULADO_DIDATICO'),
+((SELECT id FROM oferta WHERE codigo='O32'), 2017, 40, 29, 43.89, 51.48, 2.9274, '3', 'Componente Específico com resultado superior à Formação Geral', 'Acompanhar o desempenho em Formação Geral', 'SIMULADO_DIDATICO'),
+((SELECT id FROM oferta WHERE codigo='O32'), 2018, 35, 25, 44.27, 51.43, 2.9777, '4', 'Componente Específico com resultado superior à Formação Geral', 'Acompanhar o desempenho em Formação Geral', 'SIMULADO_DIDATICO'),
+((SELECT id FROM oferta WHERE codigo='O32'), 2019, 39, 27, 44.82, 52.69, 2.9593, '4', 'Componente Específico com resultado superior à Formação Geral', 'Acompanhar o desempenho em Formação Geral', 'SIMULADO_DIDATICO'),
+((SELECT id FROM oferta WHERE codigo='O32'), 2020, 37, 25, 43.83, 52.61, 2.9991, '4', 'Componente Específico com resultado superior à Formação Geral', 'Acompanhar o desempenho em Formação Geral', 'SIMULADO_DIDATICO'),
+((SELECT id FROM oferta WHERE codigo='O32'), 2021, 45, 30, 45.94, 54.64, 2.9408, '3', 'Componente Específico com resultado superior à Formação Geral', 'Acompanhar o desempenho em Formação Geral', 'SIMULADO_DIDATICO'),
+((SELECT id FROM oferta WHERE codigo='O32'), 2022, 42, 28, 45.717, 55.039, 2.924, '3', 'Componente Específico com resultado superior à Formação Geral', 'Acompanhar o desempenho em Formação Geral', 'OFICIAL_INEP'),
+((SELECT id FROM oferta WHERE codigo='O32'), 2023, 45, 31, 45.43, 54.83, 2.9096, '3', 'Componente Específico com resultado superior à Formação Geral', 'Acompanhar o desempenho em Formação Geral', 'SIMULADO_DIDATICO'),
+((SELECT id FROM oferta WHERE codigo='O32'), 2024, 43, 30, 47.96, 54.03, 2.7484, '3', 'Componente Específico com resultado superior à Formação Geral', 'Acompanhar o desempenho em Formação Geral', 'SIMULADO_DIDATICO'),
+((SELECT id FROM oferta WHERE codigo='O32'), 2025, 38, 28, 48.4, 52.17, 2.7755, '3', 'Componente Específico com resultado superior à Formação Geral', 'Acompanhar o desempenho em Formação Geral', 'SIMULADO_DIDATICO');
