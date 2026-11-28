@@ -19,16 +19,21 @@ def num(valor):
 
 HASH_DEMO = "$2y$12$e6CxI2JMsQfpiNk3aJSqWOeOxV4RvAzj/TQFxNPLO8zVpNb8UcL8C"
 
+RECORTE_PADRAO = "R09"
+OFERTAS_ESPERADAS = 2
+RESULTADOS_ESPERADOS = 22
+
+# (codigo da oferta, titulo, descricao, situacao, responsavel, prazo, anexo_nome_original, anexo_arquivo)
 ACOES_DEMO = [
-    ("Revisar conteúdos de raciocínio quantitativo",
-     "Revisar a ementa e os exercícios das disciplinas de estatística e matemática financeira, "
-     "alinhando-os ao perfil de questões do ENADE.",
+    ("O07", "Revisar conteúdos de raciocínio jurídico e interpretação de textos",
+     "Revisar ementas e atividades das disciplinas que trabalham argumentação jurídica e leitura "
+     "de textos, alinhando-as ao perfil de questões do ENADE.",
      "Em andamento", "NDE do curso", "2026-11-30", "plano.pdf", "demo_plano_acao.pdf"),
-    ("Aplicar simulado interdisciplinar",
-     "Aplicação de simulado com questões de formação geral e de componente específico "
-     "para os concluintes, com devolutiva por área.",
+    ("O35", "Aplicar simulado interdisciplinar de Gestão Pública",
+     "Simulado com questões de formação geral e de componente específico para os concluintes, "
+     "com devolutiva por área aos estudantes.",
      "Concluída", "Coordenação", "2026-10-15", "registro_oficina.png", "demo_registro_oficina.png"),
-    ("Oficina de questões discursivas",
+    ("O07", "Oficina de questões discursivas",
      "Oficina prática para treinar a resolução e a correção de questões discursivas "
      "com os estudantes do último ano.",
      "Planejada", "Docentes", "2027-03-20", None, None),
@@ -44,26 +49,34 @@ def secao_demo():
     out.append("INSERT INTO usuario (nome, login, senha) VALUES")
     out.append(f"({esc('Usuário demonstrador')}, {esc('demo')}, {esc(HASH_DEMO)});")
     out.append("")
-    out.append("-- Ações de exemplo da oferta O01. Anexos reais em app/uploads/ (gerados por")
+    out.append("-- Ações de exemplo das ofertas " + " e ".join(sorted({a[0] for a in ACOES_DEMO})) + ". Anexos reais em app/uploads/ (gerados por")
     out.append("-- scripts/gerar_anexos_demo.py); anexo_arquivo guarda só o nome armazenado.")
     out.append("INSERT INTO acao (oferta_id, titulo, descricao, situacao, responsavel, prazo,")
     out.append("    anexo_nome_original, anexo_arquivo) VALUES")
     out.append(",\n".join(
-        f"((SELECT id FROM oferta WHERE codigo='O01'), {esc(t)}, {esc(d)}, {esc(s)}, {esc(r)}, "
+        f"((SELECT id FROM oferta WHERE codigo={esc(c)}), {esc(t)}, {esc(d)}, {esc(s)}, {esc(r)}, "
         f"{esc(p)}, {esc(no)}, {esc(na)})"
-        for t, d, s, r, p, no, na in ACOES_DEMO) + ";")
+        for c, t, d, s, r, p, no, na in ACOES_DEMO) + ";")
     out.append("")
     return out
 
 
 def main():
-    if len(sys.argv) < 2:
-        sys.exit("Uso: python -I scripts/gerar_dados_iniciais.py CSV [saida.sql]")
-    csv_path = sys.argv[1]
-    saida = sys.argv[2] if len(sys.argv) > 2 else "banco/dados_iniciais.sql"
+    args = sys.argv[1:]
+    recorte = RECORTE_PADRAO
+    if "--recorte" in args:
+        i = args.index("--recorte")
+        recorte = args[i + 1]
+        del args[i:i + 2]
+    if not args:
+        sys.exit("Uso: python -I scripts/gerar_dados_iniciais.py CSV [saida.sql] [--recorte R09]")
+    csv_path = args[0]
+    saida = args[1] if len(args) > 1 else "banco/dados_iniciais.sql"
 
     with open(csv_path, encoding="utf-8-sig", newline="") as f:
-        linhas = list(csv.DictReader(f, delimiter=";"))
+        linhas = [l for l in csv.DictReader(f, delimiter=";") if l["recorte_id"] == recorte]
+    if not linhas:
+        sys.exit(f"Nenhuma linha do recorte {recorte} em {csv_path}")
 
     ofertas = OrderedDict()
     anomalias = []
@@ -92,14 +105,17 @@ def main():
         if l["origem_dado"] not in ("OFICIAL_INEP", "SIMULADO_DIDATICO"):
             anomalias.append(f"{ref}: origem_dado inválido ({l['origem_dado']!r})")
 
+    if recorte == RECORTE_PADRAO and (len(ofertas) != OFERTAS_ESPERADAS or len(linhas) != RESULTADOS_ESPERADOS):
+        print(f"AVISO: esperado {OFERTAS_ESPERADAS} ofertas e {RESULTADOS_ESPERADOS} resultados; "
+              f"encontrado {len(ofertas)} e {len(linhas)}.")
     por_origem = Counter(l["origem_dado"] for l in linhas)
     out = []
     out.append("USE painel_enade;")
     out.append("")
     out.append("-- Dados iniciais do Painel ENADE (T04 e T05) - gerado por scripts/gerar_dados_iniciais.py")
-    out.append("-- Conteúdo: ofertas e resultados do R01; usuário de demonstração (demo) e 3 ações de")
-    out.append("-- exemplo da oferta O01 (2 com anexo em app/uploads/).")
-    out.append("-- Fonte: arquivo do professor datasets_enade_2015_2025/dados_por_recorte/R01_enade_2015_2025.csv (recorte R01).")
+    out.append(f"-- Conteúdo: ofertas e resultados do {recorte}; usuário de demonstração (demo) e 3 ações de")
+    out.append("-- exemplo (2 com anexo em app/uploads/).")
+    out.append(f"-- Fonte: arquivo do professor datasets_enade_2015_2025/dados_por_recorte/{recorte}_enade_2015_2025.csv (recorte {recorte}).")
     out.append(f"-- Total: {len(linhas)} resultados em {len(ofertas)} ofertas "
                f"({por_origem['OFICIAL_INEP']} OFICIAL_INEP e {por_origem['SIMULADO_DIDATICO']} SIMULADO_DIDATICO).")
     out.append("-- origem_dado foi mantido exatamente como no CSV: dados simulados NAO sao oficiais.")

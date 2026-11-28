@@ -1,51 +1,55 @@
 USE painel_enade;
 
+-- Dados iniciais do Painel ENADE (T04 e T05) - gerado por scripts/gerar_dados_iniciais.py
+-- Conteúdo: ofertas e resultados do R09; usuário de demonstração (demo) e 3 ações de
+-- exemplo (2 com anexo em app/uploads/).
+-- Fonte: arquivo do professor datasets_enade_2015_2025/dados_por_recorte/R09_enade_2015_2025.csv (recorte R09).
+-- Total: 22 resultados em 2 ofertas (4 OFICIAL_INEP e 18 SIMULADO_DIDATICO).
+-- origem_dado foi mantido exatamente como no CSV: dados simulados NAO sao oficiais.
+-- ATENCAO: ponto_forte e ponto_atencao sao SUGESTOES do CSV (ponto_forte_sugerido /
+-- ponto_atencao_sugerido) e devem ser revisados pelo grupo.
+-- Execute depois de banco/estrutura.sql (que recria as tabelas vazias).
+
 INSERT INTO oferta (codigo, recorte_id, curso, grau_academico, modalidade) VALUES
-('O01', 'R01', 'ADMINISTRAÇÃO', 'Bacharelado', 'Educação Presencial'),
-('O02', 'R01', 'ADMINISTRAÇÃO', 'Bacharelado', 'Educação a Distância'),
-('O32', 'R01', 'TECNOLOGIA EM GESTÃO COMERCIAL', 'Tecnológico', 'Educação a Distância');
+('O07', 'R09', 'DIREITO', 'Bacharelado', 'Educação Presencial'),
+('O35', 'R09', 'TECNOLOGIA EM GESTÃO PÚBLICA', 'Tecnológico', 'Educação a Distância');
 
 INSERT INTO resultado (oferta_id, ano, inscritos, participantes, nota_formacao_geral,
     nota_componente_especifico, conceito_continuo, conceito_faixa, ponto_forte, ponto_atencao, origem_dado) VALUES
-((SELECT id FROM oferta WHERE codigo='O01'), 2015, 95, 86, 52.7314, 41.2919, 2.5756, '3', 'Formação Geral com resultado superior ao Componente Específico', 'Acompanhar o desempenho no Componente Específico', 'OFICIAL_INEP'),
-((SELECT id FROM oferta WHERE codigo='O01'), 2016, 79, 73, 49.03, 39.65, 2.551, '3', 'Formação Geral com resultado superior ao Componente Específico', 'Acompanhar o desempenho no Componente Específico', 'SIMULADO_DIDATICO'),
-((SELECT id FROM oferta WHERE codigo='O01'), 2017, 62, 57, 45.35, 38.74, 2.5215, '3', 'Formação Geral com resultado superior ao Componente Específico', 'Acompanhar o desempenho no Componente Específico', 'SIMULADO_DIDATICO'),
-((SELECT id FROM oferta WHERE codigo='O01'), 2018, 44, 41, 41.69268, 37.52195, 2.52002, '3', 'Formação Geral com resultado superior ao Componente Específico', 'Acompanhar o desempenho no Componente Específico', 'OFICIAL_INEP'),
-((SELECT id FROM oferta WHERE codigo='O01'), 2019, 41, 36, 44.99, 38.01, 2.5195, '3', 'Formação Geral com resultado superior ao Componente Específico', 'Acompanhar o desempenho no Componente Específico', 'SIMULADO_DIDATICO'),
-((SELECT id FROM oferta WHERE codigo='O01'), 2020, 37, 30, 47.21, 38.38, 2.538, '3', 'Formação Geral com resultado superior ao Componente Específico', 'Acompanhar o desempenho no Componente Específico', 'SIMULADO_DIDATICO'),
-((SELECT id FROM oferta WHERE codigo='O01'), 2021, 33, 25, 50.24, 38.33, 2.5107, '3', 'Formação Geral com resultado superior ao Componente Específico', 'Acompanhar o desempenho no Componente Específico', 'SIMULADO_DIDATICO'),
-((SELECT id FROM oferta WHERE codigo='O01'), 2022, 30, 21, 53.471, 38.752, 2.537, '3', 'Formação Geral com resultado superior ao Componente Específico', 'Acompanhar o desempenho no Componente Específico', 'OFICIAL_INEP'),
-((SELECT id FROM oferta WHERE codigo='O01'), 2023, 24, 17, 54.44, 39.98, 2.4975, '3', 'Formação Geral com resultado superior ao Componente Específico', 'Acompanhar o desempenho no Componente Específico', 'SIMULADO_DIDATICO'),
-((SELECT id FROM oferta WHERE codigo='O01'), 2024, 22, 15, 54.98, 39.86, 2.5286, '3', 'Formação Geral com resultado superior ao Componente Específico', 'Acompanhar o desempenho no Componente Específico', 'SIMULADO_DIDATICO'),
-((SELECT id FROM oferta WHERE codigo='O01'), 2025, 19, 13, 55.74, 40.84, 2.5086, '3', 'Formação Geral com resultado superior ao Componente Específico', 'Acompanhar o desempenho no Componente Específico', 'SIMULADO_DIDATICO'),
-((SELECT id FROM oferta WHERE codigo='O02'), 2015, 132, 106, 49.27, 38.25, 2.5029, '3', 'Formação Geral com resultado superior ao Componente Específico', 'Acompanhar o desempenho no Componente Específico', 'SIMULADO_DIDATICO'),
-((SELECT id FROM oferta WHERE codigo='O02'), 2016, 135, 109, 48.94, 38.74, 2.5356, '3', 'Formação Geral com resultado superior ao Componente Específico', 'Acompanhar o desempenho no Componente Específico', 'SIMULADO_DIDATICO'),
-((SELECT id FROM oferta WHERE codigo='O02'), 2017, 130, 105, 49.44, 39.82, 2.5611, '3', 'Formação Geral com resultado superior ao Componente Específico', 'Acompanhar o desempenho no Componente Específico', 'SIMULADO_DIDATICO'),
-((SELECT id FROM oferta WHERE codigo='O02'), 2018, 138, 115, 48.24, 39.07, 2.6067, '3', 'Formação Geral com resultado superior ao Componente Específico', 'Acompanhar o desempenho no Componente Específico', 'SIMULADO_DIDATICO'),
-((SELECT id FROM oferta WHERE codigo='O02'), 2019, 145, 118, 49.7, 39.6, 2.5788, '3', 'Formação Geral com resultado superior ao Componente Específico', 'Acompanhar o desempenho no Componente Específico', 'SIMULADO_DIDATICO'),
-((SELECT id FROM oferta WHERE codigo='O02'), 2020, 147, 121, 49.42, 41.14, 2.5735, '3', 'Formação Geral com resultado superior ao Componente Específico', 'Acompanhar o desempenho no Componente Específico', 'SIMULADO_DIDATICO'),
-((SELECT id FROM oferta WHERE codigo='O02'), 2021, 159, 128, 48.96, 40.81, 2.6166, '3', 'Formação Geral com resultado superior ao Componente Específico', 'Acompanhar o desempenho no Componente Específico', 'SIMULADO_DIDATICO'),
-((SELECT id FROM oferta WHERE codigo='O02'), 2022, 160, 131, 49.819, 41.519, 2.666, '3', 'Formação Geral com resultado superior ao Componente Específico', 'Acompanhar o desempenho no Componente Específico', 'OFICIAL_INEP'),
-((SELECT id FROM oferta WHERE codigo='O02'), 2023, 150, 124, 50.58, 41.41, 2.6189, '3', 'Formação Geral com resultado superior ao Componente Específico', 'Acompanhar o desempenho no Componente Específico', 'SIMULADO_DIDATICO'),
-((SELECT id FROM oferta WHERE codigo='O02'), 2024, 140, 120, 50.83, 41.6, 2.741, '3', 'Formação Geral com resultado superior ao Componente Específico', 'Acompanhar o desempenho no Componente Específico', 'SIMULADO_DIDATICO'),
-((SELECT id FROM oferta WHERE codigo='O02'), 2025, 125, 107, 49.1, 42.35, 2.6952, '3', 'Formação Geral com resultado superior ao Componente Específico', 'Acompanhar o desempenho no Componente Específico', 'SIMULADO_DIDATICO'),
-((SELECT id FROM oferta WHERE codigo='O32'), 2015, 34, 24, 42.1, 52.35, 2.9582, '4', 'Componente Específico com resultado superior à Formação Geral', 'Acompanhar o desempenho em Formação Geral', 'SIMULADO_DIDATICO'),
-((SELECT id FROM oferta WHERE codigo='O32'), 2016, 40, 29, 43.98, 50.38, 2.9317, '3', 'Componente Específico com resultado superior à Formação Geral', 'Acompanhar o desempenho em Formação Geral', 'SIMULADO_DIDATICO'),
-((SELECT id FROM oferta WHERE codigo='O32'), 2017, 40, 29, 43.89, 51.48, 2.9274, '3', 'Componente Específico com resultado superior à Formação Geral', 'Acompanhar o desempenho em Formação Geral', 'SIMULADO_DIDATICO'),
-((SELECT id FROM oferta WHERE codigo='O32'), 2018, 35, 25, 44.27, 51.43, 2.9777, '4', 'Componente Específico com resultado superior à Formação Geral', 'Acompanhar o desempenho em Formação Geral', 'SIMULADO_DIDATICO'),
-((SELECT id FROM oferta WHERE codigo='O32'), 2019, 39, 27, 44.82, 52.69, 2.9593, '4', 'Componente Específico com resultado superior à Formação Geral', 'Acompanhar o desempenho em Formação Geral', 'SIMULADO_DIDATICO'),
-((SELECT id FROM oferta WHERE codigo='O32'), 2020, 37, 25, 43.83, 52.61, 2.9991, '4', 'Componente Específico com resultado superior à Formação Geral', 'Acompanhar o desempenho em Formação Geral', 'SIMULADO_DIDATICO'),
-((SELECT id FROM oferta WHERE codigo='O32'), 2021, 45, 30, 45.94, 54.64, 2.9408, '3', 'Componente Específico com resultado superior à Formação Geral', 'Acompanhar o desempenho em Formação Geral', 'SIMULADO_DIDATICO'),
-((SELECT id FROM oferta WHERE codigo='O32'), 2022, 42, 28, 45.717, 55.039, 2.924, '3', 'Componente Específico com resultado superior à Formação Geral', 'Acompanhar o desempenho em Formação Geral', 'OFICIAL_INEP'),
-((SELECT id FROM oferta WHERE codigo='O32'), 2023, 45, 31, 45.43, 54.83, 2.9096, '3', 'Componente Específico com resultado superior à Formação Geral', 'Acompanhar o desempenho em Formação Geral', 'SIMULADO_DIDATICO'),
-((SELECT id FROM oferta WHERE codigo='O32'), 2024, 43, 30, 47.96, 54.03, 2.7484, '3', 'Componente Específico com resultado superior à Formação Geral', 'Acompanhar o desempenho em Formação Geral', 'SIMULADO_DIDATICO'),
-((SELECT id FROM oferta WHERE codigo='O32'), 2025, 38, 28, 48.4, 52.17, 2.7755, '3', 'Componente Específico com resultado superior à Formação Geral', 'Acompanhar o desempenho em Formação Geral', 'SIMULADO_DIDATICO');
+((SELECT id FROM oferta WHERE codigo='O07'), 2015, 64, 60, 56.5933, 38.575, 1.9632, '3', 'Formação Geral com resultado superior ao Componente Específico', 'Acompanhar o desempenho no Componente Específico', 'OFICIAL_INEP'),
+((SELECT id FROM oferta WHERE codigo='O07'), 2016, 64, 61, 53.14, 37.61, 1.9025, '2', 'Formação Geral com resultado superior ao Componente Específico', 'Acompanhar o desempenho no Componente Específico', 'SIMULADO_DIDATICO'),
+((SELECT id FROM oferta WHERE codigo='O07'), 2017, 63, 60, 49.38, 36.5, 1.881, '2', 'Formação Geral com resultado superior ao Componente Específico', 'Acompanhar o desempenho no Componente Específico', 'SIMULADO_DIDATICO'),
+((SELECT id FROM oferta WHERE codigo='O07'), 2018, 62, 59, 45.46949, 35.25763, 1.84629, '2', 'Formação Geral com resultado superior ao Componente Específico', 'Acompanhar o desempenho no Componente Específico', 'OFICIAL_INEP'),
+((SELECT id FROM oferta WHERE codigo='O07'), 2019, 76, 71, 48.02, 36.24, 1.9693, '3', 'Formação Geral com resultado superior ao Componente Específico', 'Acompanhar o desempenho no Componente Específico', 'SIMULADO_DIDATICO'),
+((SELECT id FROM oferta WHERE codigo='O07'), 2020, 87, 80, 50.93, 37.54, 2.1333, '3', 'Formação Geral com resultado superior ao Componente Específico', 'Acompanhar o desempenho no Componente Específico', 'SIMULADO_DIDATICO'),
+((SELECT id FROM oferta WHERE codigo='O07'), 2021, 102, 92, 54.02, 39.5, 2.2812, '3', 'Formação Geral com resultado superior ao Componente Específico', 'Acompanhar o desempenho no Componente Específico', 'SIMULADO_DIDATICO'),
+((SELECT id FROM oferta WHERE codigo='O07'), 2022, 114, 101, 56.781, 40.504, 2.394, '3', 'Formação Geral com resultado superior ao Componente Específico', 'Acompanhar o desempenho no Componente Específico', 'OFICIAL_INEP'),
+((SELECT id FROM oferta WHERE codigo='O07'), 2023, 114, 99, 58.46, 42.67, 2.5228, '3', 'Formação Geral com resultado superior ao Componente Específico', 'Acompanhar o desempenho no Componente Específico', 'SIMULADO_DIDATICO'),
+((SELECT id FROM oferta WHERE codigo='O07'), 2024, 115, 98, 58.83, 41.74, 2.6744, '3', 'Formação Geral com resultado superior ao Componente Específico', 'Acompanhar o desempenho no Componente Específico', 'SIMULADO_DIDATICO'),
+((SELECT id FROM oferta WHERE codigo='O07'), 2025, 121, 102, 59.1, 43.05, 2.7228, '3', 'Formação Geral com resultado superior ao Componente Específico', 'Acompanhar o desempenho no Componente Específico', 'SIMULADO_DIDATICO'),
+((SELECT id FROM oferta WHERE codigo='O35'), 2015, 8, 6, 51.84, 51.48, 2.6282, '3', 'Desempenho equilibrado entre Formação Geral e Componente Específico', 'Manter acompanhamento da participação e da evolução histórica', 'SIMULADO_DIDATICO'),
+((SELECT id FROM oferta WHERE codigo='O35'), 2016, 8, 6, 51.64, 51.23, 2.7282, '3', 'Desempenho equilibrado entre Formação Geral e Componente Específico', 'Manter acompanhamento da participação e da evolução histórica', 'SIMULADO_DIDATICO'),
+((SELECT id FROM oferta WHERE codigo='O35'), 2017, 8, 6, 51.01, 50.96, 2.6985, '3', 'Desempenho equilibrado entre Formação Geral e Componente Específico', 'Manter acompanhamento da participação e da evolução histórica', 'SIMULADO_DIDATICO'),
+((SELECT id FROM oferta WHERE codigo='O35'), 2018, 9, 6, 51.72, 51.14, 2.7694, '3', 'Desempenho equilibrado entre Formação Geral e Componente Específico', 'Manter acompanhamento da participação e da evolução histórica', 'SIMULADO_DIDATICO'),
+((SELECT id FROM oferta WHERE codigo='O35'), 2019, 9, 6, 51.81, 49.49, 2.8669, '3', 'Formação Geral com resultado superior ao Componente Específico', 'Acompanhar o desempenho no Componente Específico', 'SIMULADO_DIDATICO'),
+((SELECT id FROM oferta WHERE codigo='O35'), 2020, 11, 7, 51.7, 51.06, 2.7983, '3', 'Desempenho equilibrado entre Formação Geral e Componente Específico', 'Manter acompanhamento da participação e da evolução histórica', 'SIMULADO_DIDATICO'),
+((SELECT id FROM oferta WHERE codigo='O35'), 2021, 9, 6, 51.51, 49.41, 2.9405, '3', 'Formação Geral com resultado superior ao Componente Específico', 'Acompanhar o desempenho no Componente Específico', 'SIMULADO_DIDATICO'),
+((SELECT id FROM oferta WHERE codigo='O35'), 2022, 14, 9, 52.388, 50.1, 2.996, '4', 'Formação Geral com resultado superior ao Componente Específico', 'Acompanhar o desempenho no Componente Específico', 'OFICIAL_INEP'),
+((SELECT id FROM oferta WHERE codigo='O35'), 2023, 19, 13, 51.95, 49.02, 3.02, '4', 'Formação Geral com resultado superior ao Componente Específico', 'Acompanhar o desempenho no Componente Específico', 'SIMULADO_DIDATICO'),
+((SELECT id FROM oferta WHERE codigo='O35'), 2024, 18, 12, 52.61, 48.34, 2.9708, '4', 'Formação Geral com resultado superior ao Componente Específico', 'Acompanhar o desempenho no Componente Específico', 'SIMULADO_DIDATICO'),
+((SELECT id FROM oferta WHERE codigo='O35'), 2025, 25, 18, 51.75, 46.8, 3.0221, '4', 'Formação Geral com resultado superior ao Componente Específico', 'Acompanhar o desempenho no Componente Específico', 'SIMULADO_DIDATICO');
 
+-- Usuário de demonstração (login: demo / senha: demo123).
+-- A senha é guardada com password_hash(..., PASSWORD_DEFAULT), nunca em texto puro.
+-- CONFERIR: o PDF do projeto pede o usuário "no formato utilizado no exemplo da aula";
+-- se o exemplo da aula usar outro formato (texto puro, md5...), ajustar HASH_DEMO e o login.
 INSERT INTO usuario (nome, login, senha) VALUES
 ('Usuário demonstrador', 'demo', '$2y$12$e6CxI2JMsQfpiNk3aJSqWOeOxV4RvAzj/TQFxNPLO8zVpNb8UcL8C');
 
+-- Ações de exemplo das ofertas O07 e O35. Anexos reais em app/uploads/ (gerados por
+-- scripts/gerar_anexos_demo.py); anexo_arquivo guarda só o nome armazenado.
 INSERT INTO acao (oferta_id, titulo, descricao, situacao, responsavel, prazo,
     anexo_nome_original, anexo_arquivo) VALUES
-((SELECT id FROM oferta WHERE codigo='O01'), 'Revisar conteúdos de raciocínio quantitativo', 'Revisar a ementa e os exercícios das disciplinas de estatística e matemática financeira, alinhando-os ao perfil de questões do ENADE.', 'Em andamento', 'NDE do curso', '2026-11-30', 'plano.pdf', 'demo_plano_acao.pdf'),
-((SELECT id FROM oferta WHERE codigo='O01'), 'Aplicar simulado interdisciplinar', 'Aplicação de simulado com questões de formação geral e de componente específico para os concluintes, com devolutiva por área.', 'Concluída', 'Coordenação', '2026-10-15', 'registro_oficina.png', 'demo_registro_oficina.png'),
-((SELECT id FROM oferta WHERE codigo='O01'), 'Oficina de questões discursivas', 'Oficina prática para treinar a resolução e a correção de questões discursivas com os estudantes do último ano.', 'Planejada', 'Docentes', '2027-03-20', NULL, NULL);
+((SELECT id FROM oferta WHERE codigo='O07'), 'Revisar conteúdos de raciocínio jurídico e interpretação de textos', 'Revisar ementas e atividades das disciplinas que trabalham argumentação jurídica e leitura de textos, alinhando-as ao perfil de questões do ENADE.', 'Em andamento', 'NDE do curso', '2026-11-30', 'plano.pdf', 'demo_plano_acao.pdf'),
+((SELECT id FROM oferta WHERE codigo='O35'), 'Aplicar simulado interdisciplinar de Gestão Pública', 'Simulado com questões de formação geral e de componente específico para os concluintes, com devolutiva por área aos estudantes.', 'Concluída', 'Coordenação', '2026-10-15', 'registro_oficina.png', 'demo_registro_oficina.png'),
+((SELECT id FROM oferta WHERE codigo='O07'), 'Oficina de questões discursivas', 'Oficina prática para treinar a resolução e a correção de questões discursivas com os estudantes do último ano.', 'Planejada', 'Docentes', '2027-03-20', NULL, NULL);
