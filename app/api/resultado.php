@@ -71,7 +71,7 @@ try {
     $a = false;
     if ($r) {
         $stmt = $pdo->prepare(
-            'SELECT ano, conceito_faixa, conceito_continuo
+            'SELECT ano, conceito_faixa, conceito_continuo, origem_dado
              FROM resultado
              WHERE oferta_id = ? AND ano < ?
              ORDER BY ano DESC
@@ -140,7 +140,8 @@ if ($a) {
     $variacao = null;
     $faixaAtual = $r['conceito_faixa'];
     $faixaAnterior = $a['conceito_faixa'];
-    if ($faixaAtual !== null && $faixaAnterior !== null
+    $mesmaOrigem = $a['origem_dado'] === $r['origem_dado'];
+    if ($mesmaOrigem && $faixaAtual !== null && $faixaAnterior !== null
         && ctype_digit($faixaAtual) && ctype_digit($faixaAnterior)) {
         $variacao = (int) $faixaAtual - (int) $faixaAnterior;
     }
@@ -149,6 +150,7 @@ if ($a) {
         'ano' => (int) $a['ano'],
         'conceito_faixa' => $a['conceito_faixa'],
         'conceito_continuo' => para_float($a['conceito_continuo']),
+        'origem_dado' => $a['origem_dado'],
         'variacao_faixa' => $variacao,
     ];
 }
